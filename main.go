@@ -3,11 +3,11 @@ package main
 import (
 	"log"
 
-	"github.com/gofiber/fiber"
+	"github.com/gofiber/fiber/v2"
 )
 
-func welcome(c *fiber.Ctx) {
-	c.Send("Welcome!")
+func welcome(c *fiber.Ctx) error {
+	return c.SendString("Welcome to my awesome API")
 }
 
 func main() {
@@ -15,5 +15,5 @@ func main() {
 
 	app.Get("/", welcome)
 
-	log.Fatal(app.Listen(3000))
+	log.Fatal(app.Listen(":3000"))
 }
