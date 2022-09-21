@@ -1,4 +1,4 @@
-module example/go_fiber_tut
+module github.com/21satvik/go_fiber_tut
 
 go 1.19
 
