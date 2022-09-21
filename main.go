@@ -7,7 +7,7 @@ import (
 )
 
 func welcome(c *fiber.Ctx) error {
-	return c.SendString("Welcome to my awesome API")
+	return c.SendString("Welcome to my awesome API!")
 }
 
 func main() {
