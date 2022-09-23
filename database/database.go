@@ -4,6 +4,7 @@ import (
 	"log"
 	"os"
 
+	"github.com/21satvik/go_fiber_tut/models"
 	"gorm.io/driver/sqlite"
 	"gorm.io/gorm"
 	"gorm.io/gorm/logger"
@@ -15,7 +16,7 @@ type DbInstance struct {
 
 var Database DbInstance
 
-func connectDb() {
+func ConnectDb() {
 	db, err := gorm.Open(sqlite.Open("test.db"), &gorm.Config{})
 	if err != nil {
 		log.Fatal("Failed to connect to database! \n", err.Error())
@@ -25,6 +26,7 @@ func connectDb() {
 	db.Logger = logger.Default.LogMode(logger.Info)
 	log.Println("Running Migrations...")
 	//TODO: Add migrations
+	db.AutoMigrate(&models.User{}, &models.Product{}, &models.Order{})
 
 	Database = DbInstance{Db: db}
 }
