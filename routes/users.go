@@ -13,7 +13,7 @@ type User struct {
 	LastName string `json:"last_name"`
 }
 
-func CreateResponseuser(userModel models.User) User {
+func CreateResponseUser(userModel models.User) User {
 	return User{
 		Id:       userModel.Id,
 		FirsName: userModel.FirstName,
@@ -28,7 +28,7 @@ func CreateUser(c *fiber.Ctx) error {
 		return c.Status(400).JSON(err.Error())
 	}
 	database.Database.Db.Create(&user)
-	responseUser := CreateResponseuser(user)
+	responseUser := CreateResponseUser(user)
 	return c.Status(200).JSON(responseUser)
 }
 
@@ -37,7 +37,7 @@ func GetUsers(c *fiber.Ctx) error {
 	database.Database.Db.Find(&users)
 	var responseUsers []User
 	for _, user := range users {
-		responseUsers = append(responseUsers, CreateResponseuser(user))
+		responseUsers = append(responseUsers, CreateResponseUser(user))
 	}
 	return c.Status(200).JSON(responseUsers)
 }
@@ -52,7 +52,7 @@ func GetUser(c *fiber.Ctx) error {
 	if user.Id == 0 {
 		return c.Status(404).JSON("User not found!")
 	}
-	responseUser := CreateResponseuser(user)
+	responseUser := CreateResponseUser(user)
 	return c.Status(200).JSON(responseUser)
 }
 
@@ -86,7 +86,7 @@ func UpdateUser(c *fiber.Ctx) error {
 
 	database.Database.Db.Save(&user)
 
-	responseUser := CreateResponseuser(user)
+	responseUser := CreateResponseUser(user)
 	return c.Status(200).JSON(responseUser)
 }
 
